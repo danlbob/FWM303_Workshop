@@ -10,4 +10,3 @@ export const auth = defineAuth({
   },
   groups: ["Admin"],
 });
-EMAIL="you@example.com"
