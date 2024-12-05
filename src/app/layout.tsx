@@ -6,6 +6,8 @@ import '@aws-amplify/ui-react/styles.css'
 import { Header, Footer } from '../components';
 import { Amplify } from 'aws-amplify';
 import outputs from '../../amplify_outputs.json';
+import { ThemeProvider, Authenticator } from '@aws-amplify/ui-react';
+
 
 Amplify.configure(outputs, {ssr: true});
 
@@ -17,9 +19,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Header />
-        {children}
-        <Footer />
+      <ThemeProvider>
+        <Authenticator.Provider>
+          <Header />
+          {children}
+          <Footer />
+        </Authenticator.Provider>
+      </ThemeProvider>
       </body>
     </html>
   )

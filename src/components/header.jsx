@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { Authenticator, useAuthenticator } from '@aws-amplify/ui-react';
+
 import Modal from '@cloudscape-design/components/modal';
 import ProgressBar from '@cloudscape-design/components/progress-bar';
 import SpaceBetween from '@cloudscape-design/components/space-between';
@@ -8,8 +10,10 @@ import TopNavigation from '@cloudscape-design/components/top-navigation';
 import { LoadSampleData } from '../utils/data-loader/loader';
 import { getImagePath, ASSET_PATHS } from '../utils/image-utils';
 
+
+
 export default function Header(props) {
-  const { user, signOut } = { user: undefined, signOut: () => {} };
+  const { user, signOut } = useAuthenticator((context) => [context.user]);
   const [visible, setVisible] = useState(false);
   const [loadDataVisible, setLoadDataVisible] = useState(false);
   const [categoryProgress, setCategoryProgress] = useState(0);
@@ -131,7 +135,7 @@ export default function Header(props) {
       header="Please sign in or create an account"
       modalRoot={modalRoot}
     >
-
+      <Authenticator />
     </Modal>
   </div>
   );
